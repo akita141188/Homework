@@ -5,6 +5,7 @@ import FooterComponent from "./Component/FooterComponent";
 
 
 const App = () => {
+
   const Content = {
     h1: "HỌC VIỆN VIETPRO",
     title: "Giới thiệu",
@@ -13,7 +14,12 @@ const App = () => {
     p2: `Mỗi năm, Vietpro đào tạo &amp; giới thiệu việc làm thành công cho hàng trăm học viên tới các đơn vị tuyển dụng đối tác,
     nhiều trong số đó đa trở thành các Leader, Manager,… quan trọng cho các công ty lớn.`,
     p3: "Bản quyền thuộc Vietpro Academy - 2024",
-  }
+    src1: "./images/vi.png",
+    src2: "./images/en.png",
+    span1: "Tiếng Việt",
+    span2: "Tiếng Anh",
+  };
+
   const [content, setContent] = React.useState(Content);
   const updateContent = () => {
     setContent({
@@ -24,24 +30,34 @@ const App = () => {
       p2: `Every year, Vietpro successfully trains and introduces hundreds of student partner recuitment agencies,
       many of whom have become important Leaders, Managers, etc. for large companies`,
       p3: "Copy right to VietPro Academy - 2024",
+      src1: "./images/vi.png",
+      src2: "./images/en.png",
+      span1: "Vietnamese",
+      span2: "English",
     }
-    )
-  }
-
+    );
+  };
+  
   const updateContent1 = () => setContent(Content);
   return (
     <>
-
-
       <div id="wrapper">
         <>
-        <HeaderComponent h1={content.h1} updateContent={updateContent} updateContent1={updateContent1} />
+        <HeaderComponent 
+        h1={content.h1} 
+        updateContent={updateContent} 
+        updateContent1={updateContent1}
+        src1={content.src1}
+        src2={content.src2}
+        span1={content.span1}
+        span2={content.span2}
+         />
         <MainComponent title={content.title} p1={content.p1} p2={content.p2} />
         <FooterComponent p3={content.p3} />
         </>
       </div>
     </>
   )
-}
+};
 
 export default App;
