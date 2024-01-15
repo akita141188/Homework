@@ -11,5 +11,4 @@ const MainComponent = ({ title, p1, p2 }) => {
         </>
     )
 }
-
 export default MainComponent;

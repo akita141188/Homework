@@ -8,5 +8,4 @@ const FooterComponent = ({p3}) => {
         </>
     )
 }
-
 export default FooterComponent;

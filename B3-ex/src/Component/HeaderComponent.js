@@ -26,5 +26,4 @@ const HeaderComponent = ({ h1, updateContent, updateContent1, src1, src2, span1,
         </>
     )
 }
-
 export default HeaderComponent;
