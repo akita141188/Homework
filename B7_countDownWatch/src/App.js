@@ -25,10 +25,18 @@ const App = () => {
   };
 
   const nextNumber = () => {
-    setCount(count + 1)
+    if (intervalId) {
+      alert("Press the Stop button before Next Button")
+    } else {
+      setCount(count + 1)
+    }
   }
   const prevNumber = () => {
-    setCount(count - 1)
+    if (intervalId) {
+      alert("Press the Stop button before Prev Button")
+    } else {
+      setCount(count - 1)
+    }
   }
   const resetCountdown = () => {
     setCount(60)
@@ -54,7 +62,6 @@ const App = () => {
         </div>
       </div>
     </Provider>
-
   )
 }
 
