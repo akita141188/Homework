@@ -39,7 +39,8 @@ const App = () => {
     }
   }
   const resetCountdown = () => {
-    setCount(60)
+    setCount(60);
+    clearInterval(intervalId);
   }
   return (
     <Provider store={store}>
