@@ -23,25 +23,24 @@ const App = () => {
   //     clearInterval(interval)
   //   },3000)
 
-  let count = 0;
   
   const start=()=>{
+    let count = 0;
+
     const interval= setInterval(()=>{
       const randomIndex = Math.floor(Math.random() * images.length);
       setImg(images[randomIndex]);
       count += 50;
-      if (count >= 1000) {
+      if (count >= 500) {
         clearInterval(interval);
         setTimeout(() => {
           setInterval(() => {
             const randomIndex = Math.floor(Math.random() * images.length);
             setImg(images[randomIndex]);
-          }, 700);
+          }, 500);
         }, 1000);
       }
-      else if(count === 3000){
-        clearInterval(interval)
-      }
+
     },50)
     setTimeout(()=>{
       clearInterval(interval)
