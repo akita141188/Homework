@@ -4,53 +4,70 @@ import { useEffect } from "react";
 
 const TimeDownComponent = () => {
     const dispatch = useDispatch();
-    const {num,is_playing} = useSelector((store)=>store.timeDownReducer)
+    const { second, minute, hours, is_playing } = useSelector((store) => store.timeDownReducer)
 
-    useEffect(()=>{
-        const intervalID = setInterval(()=>{
-            if(is_playing){
+    useEffect(() => {
+        const intervalID = setInterval(() => {
+            if ( second >0) {
+                if (is_playing) {
                     dispatch({
-                        type : "DOWN"
+                        type: "DOWN"
                     })
+                }
+                else {
+                    setTimeout(() => {
+                        return dispatch({
+                            type: "STOP_DOWN"
+                        })
+                    }, 50)
+                }
             }
-            else{
-                setTimeout(()=>{
-                    return dispatch({
-                        type: "STOP_DOWN"
-                    })
-                },50)
+            else if (second === 0 && minute === 0 && hours ===0) {
+                dispatch({
+                    type: "RESET_ALL_DOWN",
+                })
             }
-        },1000)
-        return ()=>{
+            else {
+                dispatch({
+                    type: "DECREASE"
+                })
+            }
+
+        }, 500)
+        return () => {
             clearInterval(intervalID);
         }
-    },[num,is_playing,dispatch])
+    }, [second, minute, hours, is_playing])
 
     const onClick = (type) => {
         switch (type) {
             case "down": dispatch({
                 type: "DOWN"
             });
-            break;
+                break;
             case "stop_down": dispatch({
                 type: "STOP_DOWN"
             });
-            break;
+                break;
             case "rs_down": dispatch({
                 type: "RESET_DOWN"
             });
-            break;
+                break;
 
             default: break;
         }
     }
     return (
         <>
-            <div className="col-lg-3 col-md-3 col-sm-8 col-8">
+            <div className="col-lg-5 col-md-5 col-sm-8 col-8">
                 <div className="timer bg-danger" id="timer-down">
-                    <p>{num}</p>
-                    <button onClick={()=>onClick(!is_playing?"down":"stop_down")}  type="button" className="btn btn-dark">{is_playing?"Stop":"Down"}</button>
-                    <button onClick={()=>onClick("rs_down")} type="button" className="btn btn-dark">Reset</button>
+                    <p>
+                        {hours < 10 ? `0${hours}` : hours}:
+                        {minute < 10 ? `0${minute}` : minute}:
+                        {second < 10 ? `0${second}` : second}
+                    </p>
+                    <button onClick={() => onClick(!is_playing ? "down" : "stop_down")} type="button" className="btn btn-dark">{is_playing ? "Stop" : "Down"}</button>
+                    <button onClick={() => onClick("rs_down")} type="button" className="btn btn-dark">Reset</button>
                 </div>
             </div>
         </>
