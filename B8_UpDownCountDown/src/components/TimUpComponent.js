@@ -1,35 +1,30 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { up, stop, reset, increase, resetAll } from "../redux-setup/reducers/UpReducer";
 const TimeUpComponent = () => {
     const dispatch = useDispatch();
-    const { second, minute, hours, is_playing } = useSelector((store) => store.timeUpReducer);
+    const { second, minute, hours, is_playing } = useSelector((store) => store.UpReducer);
+
+
 
     useEffect(() => {
         const intervalID = setInterval(() => {
             if (second < 2) {
                 if (is_playing) {
-                    dispatch({
-                        type: "UP"
-                    })
+                    dispatch(up())
                 }
                 else {
                     setTimeout(() => {
-                        return dispatch({
-                            type: "STOP_UP"
-                        })
+                        return dispatch(stop())
                     }, 50)
                 }
             }
-            else if (second === 2 && minute === 2 && hours ===2) {
-                dispatch({
-                    type: "RESET_ALL_UP",
-                })
+            else if (second === 2 && minute === 2 && hours === 2) {
+                dispatch(resetAll())
             }
             else {
-                dispatch({
-                    type: "INCREASE"
-                })
+                dispatch(increase())
             }
 
         }, 500)
@@ -41,17 +36,11 @@ const TimeUpComponent = () => {
 
     const onClick = (type) => {
         switch (type) {
-            case "up": dispatch({
-                type: "UP"
-            });
+            case "up": dispatch(up());
                 break;
-            case "stop_up": dispatch({
-                type: "STOP_UP"
-            });
+            case "stop_up": dispatch(stop());
                 break;
-            case "rs_up": dispatch({
-                type: "RESET_UP"
-            });
+            case "rs_up": dispatch(reset());
                 break;
 
             default: break;
